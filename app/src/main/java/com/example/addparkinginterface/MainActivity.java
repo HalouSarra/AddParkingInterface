@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String sItem=adapterView.getItemAtPosition(i).toString();
                 ed.setHint(sItem);
-                Toast.makeText(MainActivity.this, ""+item, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -115,8 +114,8 @@ public class MainActivity extends AppCompatActivity  {
                         String nbrPlaceText = nbrPlace.getText().toString();
                         String wilayaText = wilaya.getText().toString();
                         String tarifText = tarif.getText().toString();
-                        int latitudeValue = Integer.parseInt(latitude.getText().toString());
-                        int longitudeValue = Integer.parseInt(longitude.getText().toString());
+                        double latitudeValue = Double.parseDouble(latitude.getText().toString());
+                        double longitudeValue = Double.parseDouble(longitude.getText().toString());
 
                         Intent intent = new Intent(MainActivity.this, ProfileParking.class);
                         intent.putExtra("timeOpen", timeOpenText);
