@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/white">
+    android:layout_gravity="center"
+    android:background="@color/white"
+    tools:context=".MainActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,9 +33,7 @@
             android:id="@+id/nomParking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="32dp"
             android:background="@drawable/inpute_bg"
             android:drawableLeft="@drawable/baseline_local_parking_24"
             android:drawablePadding="10dp"
@@ -45,8 +44,8 @@
             android:paddingTop="20dp"
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/autoCTextCase"
+            app:layout_constraintStart_toStartOf="@+id/autoCTextCase"
             app:layout_constraintTop_toBottomOf="@+id/signinlogo" />
 
         <EditText
@@ -90,6 +89,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/autoCTextCase"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="345dp"
             android:layout_height="67dp"
             android:layout_margin="16dp"
@@ -97,28 +97,36 @@
             android:background="@drawable/inpute_bg"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Votre wilaya"
+            android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/nomParking"
-            app:layout_constraintStart_toStartOf="@+id/nomParking"
+            app:layout_constraintEnd_toEndOf="@+id/signinlogo"
+            app:layout_constraintStart_toStartOf="@+id/signinlogo"
             app:layout_constraintTop_toBottomOf="@+id/nomParking">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="60dp"
+                android:layout_height="46dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="Wilaya" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="52dp"
+                android:layout_gravity="left"
                 android:background="@color/white"
                 android:drawableRight="@android:drawable/arrow_down_float"
-                android:hint="Votre wilaya"
+                android:gravity="center|left"
                 android:inputType="none"
-                app:layout_constraintEnd_toEndOf="@+id/nomParking"
-                app:layout_constraintStart_toStartOf="@+id/nomParking"
-                app:layout_constraintTop_toBottomOf="@+id/nomParking" />
+                android:text="Wilaya" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <EditText
             android:id="@+id/nbrPlace"
@@ -214,12 +222,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_bg"
             android:text="Confirmation"
             android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/latitude"
             app:layout_constraintStart_toStartOf="@+id/latitude"
-            app:layout_constraintTop_toBottomOf="parent"
-            android:background="@drawable/btn_bg" />
+            app:layout_constraintTop_toBottomOf="@+id/latitude" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

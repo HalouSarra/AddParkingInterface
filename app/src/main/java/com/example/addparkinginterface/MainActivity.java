@@ -9,8 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity  {
     ArrayAdapter<String>adapterItems;
     EditText timeOpen;
     EditText timeClose;
+    TextView tv;
+    TextInputLayout ed;
     private int mHour,mMinute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +36,16 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         timeOpen=findViewById(R.id.heurOverture);
         timeClose=findViewById(R.id.heurFermiture);
+        tv=findViewById(R.id.textView);
+        ed=findViewById(R.id.autoCTextCase);
         autoCompleteTextView=findViewById(R.id.autoCText);
         adapterItems= new ArrayAdapter<String>(this, R.layout.list_wilaya, item);
         autoCompleteTextView.setAdapter(adapterItems);
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item=adapterView.getItemAtPosition(i).toString();
+                String sItem=adapterView.getItemAtPosition(i).toString();
+                ed.setHint(sItem);
                 Toast.makeText(MainActivity.this, ""+item, Toast.LENGTH_SHORT).show();
             }
         });
