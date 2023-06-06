@@ -3,13 +3,14 @@ package com.example.addparkinginterface;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -25,20 +26,37 @@ public class MainActivity extends AppCompatActivity  {
             "Ouled Djellal", "Béni Abbès", "In Salah", "Guezzam", "Touggourt","Djanet","El M'Ghair ","El Meniaa" };
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String>adapterItems;
+    Button conf;
     EditText timeOpen;
     EditText timeClose;
-    TextView tv;
+    EditText namePark;
+    EditText nbrPlace;
+    EditText wilaya;
+    EditText tarif;
+    EditText latitude;
+    EditText longitude;
     TextInputLayout ed;
     private int mHour,mMinute;
+    private static final int REQUEST_PROFILE_PARKING = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         timeOpen=findViewById(R.id.heurOverture);
         timeClose=findViewById(R.id.heurFermiture);
-        tv=findViewById(R.id.textView);
         ed=findViewById(R.id.autoCTextCase);
+        conf=findViewById(R.id.btnConfirmation);
+        namePark=findViewById(R.id.nomParking);
+        nbrPlace = findViewById(R.id.nbrPlace);
+        tarif=findViewById(R.id.tarifHeure);
+        latitude=findViewById(R.id.latitude);
+        longitude=findViewById(R.id.longitude);
+
+
         autoCompleteTextView=findViewById(R.id.autoCText);
+        wilaya=autoCompleteTextView;
+
         adapterItems= new ArrayAdapter<String>(this, R.layout.list_wilaya, item);
         autoCompleteTextView.setAdapter(adapterItems);
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +104,32 @@ public class MainActivity extends AppCompatActivity  {
 
             }
         });
-    }
 
-}
+
+                conf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String timeOpenText = timeOpen.getText().toString();
+                        String timeCloseText = timeClose.getText().toString();
+                        String nameParkText = namePark.getText().toString();
+                        String nbrPlaceText = nbrPlace.getText().toString();
+                        String wilayaText = wilaya.getText().toString();
+                        String tarifText = tarif.getText().toString();
+                        int latitudeValue = Integer.parseInt(latitude.getText().toString());
+                        int longitudeValue = Integer.parseInt(longitude.getText().toString());
+
+                        Intent intent = new Intent(MainActivity.this, ProfileParking.class);
+                        intent.putExtra("timeOpen", timeOpenText);
+                        intent.putExtra("timeClose", timeCloseText);
+                        intent.putExtra("namePark", nameParkText);
+                        intent.putExtra("nbrPlace", nbrPlaceText);
+                        intent.putExtra("wilaya", wilayaText);
+                        intent.putExtra("tarif", tarifText);
+                        intent.putExtra("latitude", latitudeValue);
+                        intent.putExtra("longitude", longitudeValue);
+
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
