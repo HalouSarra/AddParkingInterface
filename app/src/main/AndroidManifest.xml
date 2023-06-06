@@ -12,11 +12,11 @@
         android:theme="@style/Theme.AddParkingInterface"
         tools:targetApi="31">
         <activity
+            android:name=".UserFindParkingView"
+            android:exported="false" />
+        <activity
             android:name=".ProfileParking"
-            android:exported="false" >
-
-    </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
