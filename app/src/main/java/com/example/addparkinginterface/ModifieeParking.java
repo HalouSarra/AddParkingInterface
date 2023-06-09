@@ -1,5 +1,4 @@
 package com.example.addparkinginterface;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
@@ -17,7 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity  {
+public class ModifieeParking extends AppCompatActivity {
     String[] item={ "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida", "Bouira", "Tamanrasset", "Tébessa", "Tlemcen",
             "Tiaret", "Tizi Ouzou", "Alger", "Djelfa", "Jijel", "Sétif", "Saïda", "Skikda", "Sidi Bel Abbès", "Annaba", "Guelma", "Constantine", "Médéa",
             "Mostaganem", "M'Sila", "Mascara", "Ouargla", "Oran", "El Bayadh", "Illizi", "Bordj Bou Arreridj", "Boumerdès", "El Tarf", "Tindouf","Tissemsilt",
@@ -32,8 +31,6 @@ public class MainActivity extends AppCompatActivity  {
     EditText nbrPlace;
     EditText wilaya;
     EditText tarif;
-    EditText latitude;
-    EditText longitude;
     TextInputLayout ed;
     private int mHour,mMinute;
     private static final int REQUEST_PROFILE_PARKING = 1;
@@ -41,19 +38,16 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        timeOpen=findViewById(R.id.heurOverture);
-        timeClose=findViewById(R.id.heurFermiture);
-        ed=findViewById(R.id.autoCTextCase);
-        conf=findViewById(R.id.btnConfirmation);
-        namePark=findViewById(R.id.nomParking);
-        nbrPlace = findViewById(R.id.nbrPlace);
-        tarif=findViewById(R.id.tarifHeure);
-        latitude=findViewById(R.id.latitude);
-        longitude=findViewById(R.id.longitude);
+        setContentView(R.layout.activity_modifiee_parking);
+        timeOpen=findViewById(R.id.heurOvertureMod);
+        timeClose=findViewById(R.id.heurFermitureMod);
+        ed=findViewById(R.id.autoCTextCaseMod);
+        conf=findViewById(R.id.btnConfirmationMod);
+        namePark=findViewById(R.id.nomParkingMod);
+        nbrPlace = findViewById(R.id.nbrPlaceMod);
+        tarif=findViewById(R.id.tarifHeureMod);
 
-
-        autoCompleteTextView=findViewById(R.id.autoCText);
+        autoCompleteTextView=findViewById(R.id.autoCTextMod);
         wilaya=autoCompleteTextView;
 
         adapterItems= new ArrayAdapter<String>(this, R.layout.list_wilaya, item);
@@ -65,8 +59,6 @@ public class MainActivity extends AppCompatActivity  {
                 ed.setHint(sItem);
             }
         });
-
-
         timeOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
                 mHour=calendar.get(Calendar.HOUR);
                 mMinute=calendar.get(Calendar.MINUTE);
 
-                TimePickerDialog timePickerDialog=new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog=new TimePickerDialog(ModifieeParking.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int h, int m) {
                         timeOpen.setText(h+":"+m);
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity  {
                 mHour=calendar.get(Calendar.HOUR);
                 mMinute=calendar.get(Calendar.MINUTE);
 
-                TimePickerDialog timePickerDialog=new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog=new TimePickerDialog(ModifieeParking.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int h, int m) {
                         timeClose.setText(h+":"+m);
@@ -103,31 +95,62 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-                conf.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String timeOpenText = timeOpen.getText().toString();
-                        String timeCloseText = timeClose.getText().toString();
-                        String nameParkText = namePark.getText().toString();
-                        String nbrPlaceText = nbrPlace.getText().toString();
-                        String wilayaText = wilaya.getText().toString();
-                        String tarifText = tarif.getText().toString();
-                        double latitudeValue = Double.parseDouble(latitude.getText().toString());
-                        double longitudeValue = Double.parseDouble(longitude.getText().toString());
 
-                        Intent intent = new Intent(MainActivity.this, ProfileParking.class);
-                        intent.putExtra("timeOpen", timeOpenText);
-                        intent.putExtra("timeClose", timeCloseText);
-                        intent.putExtra("namePark", nameParkText);
-                        intent.putExtra("nbrPlace", nbrPlaceText);
-                        intent.putExtra("wilaya", wilayaText);
-                        intent.putExtra("tarif", tarifText);
-                        intent.putExtra("latitude", latitudeValue);
-                        intent.putExtra("longitude", longitudeValue);
+            Intent intent = getIntent();
+            String timeOpenText = intent.getStringExtra("timeOpen");
+            String timeCloseText = intent.getStringExtra("timeClose");
+            String nameParkText = intent.getStringExtra("namePark");
+            String nbrPlaceText = intent.getStringExtra("nbrPlace");
+            String wilayaText = intent.getStringExtra("wilaya");
+            String tarifText = intent.getStringExtra("tarif");
 
-                        startActivity(intent);
-                    }
-                });
+            timeOpen=findViewById(R.id.heurOvertureMod);
+            timeClose=findViewById(R.id.heurFermitureMod);
+            ed=findViewById(R.id.autoCTextCaseMod);
+            conf=findViewById(R.id.btnConfirmationMod);
+            namePark=findViewById(R.id.nomParkingMod);
+            nbrPlace = findViewById(R.id.nbrPlaceMod);
+            tarif=findViewById(R.id.tarifHeureMod);
 
+            autoCompleteTextView=findViewById(R.id.autoCTextMod);
+            wilaya=autoCompleteTextView;
+
+            adapterItems= new ArrayAdapter<String>(this, R.layout.list_wilaya, item);
+            autoCompleteTextView.setAdapter(adapterItems);
+            autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String sItem=adapterView.getItemAtPosition(i).toString();
+                    ed.setHint(sItem);
+                }
+            });
+
+            timeOpen.setText(timeOpenText);
+            timeClose.setText(timeCloseText);
+            namePark.setText(nameParkText);
+            nbrPlace.setText(nbrPlaceText);
+            wilaya.setText(wilayaText);
+            tarif.setText(tarifText);
+
+        conf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("timeOpen", timeOpen.getText().toString());
+                intent.putExtra("timeClose", timeClose.getText().toString());
+                intent.putExtra("namePark", namePark.getText().toString());
+                intent.putExtra("nbrPlace", nbrPlace.getText().toString());
+                intent.putExtra("wilaya", wilaya.getText().toString());
+                intent.putExtra("tarif", tarif.getText().toString());
+                setResult(RESULT_OK, intent);
+                finish();
             }
-        }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+}
