@@ -289,9 +289,11 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/btn_bg"
                 android:text="Reserver une place"
                 android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
